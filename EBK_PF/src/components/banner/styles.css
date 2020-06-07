@@ -1,0 +1,102 @@
+/*header#main-header{
+    color: #000;
+    font-family: Arial, Helvetica, sans-serif;
+  }*/
+
+div#logo{
+    background-image: url("./images/top_portal_faturamento.png");
+    margin-top: 1px;
+    width: 100%;
+    max-width: 100%;
+    height: 247px;
+    background-repeat: no-repeat;
+    padding: 5px;
+    border-radius: 3px;
+    opacity: 0.8;
+    border-style: groove ;
+}
+
+div#containerbox{
+  margin: 10px;
+}
+
+div#topnav{
+  position: absolute;
+  top: 20px;
+  right: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+div#topnav a {
+  
+  /*background-color: #da552f;*/
+  font-family: Arial, Helvetica, sans-serif;
+  font-variant-caps: all-small-caps;
+  color: #fff;
+  padding: 14px 16px;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+div#topnav a:hover {
+  border-bottom-style: groove;
+  font-style: oblique;
+  color: #fff;
+  border-bottom-color: #000;
+  /*border-color: rgb(155, 137, 125);*/
+}
+
+div#topnav a:hover menu {
+  position: relative;
+  visibility: visible;
+  cursor: pointer;
+  width: 160px;
+  background-color: #555;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -80px;
+}
+
+div#topnav menu::after {
+  content: "Teste";
+  position: absolute;
+  top: 100%;
+  right:50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 /*transparent transparent transparent*/;
+}
+
+/* Toggle this class when clicking on the popup container (hide and show the popup) */
+div#topnav .shows {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 1;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+
+div#nome{
+  position: absolute;
+  top: 200px;
+  right: 40px;
+  font-size: 18px;
+  color: orange;
+}
+
