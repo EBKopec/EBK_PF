@@ -46,7 +46,7 @@ nav.menu .home{
 }
 
 
-.main-header:hover {
+.main-header :hover {
   background-color: black;
   color: black;
 }
