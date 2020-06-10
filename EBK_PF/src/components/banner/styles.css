@@ -1,102 +1,70 @@
-/*header#main-header{
-    color: #000;
-    font-family: Arial, Helvetica, sans-serif;
-  }*/
-
-div#logo{
-    background-image: url("./images/top_portal_faturamento.png");
-    margin-top: 1px;
-    width: 100%;
-    max-width: 100%;
-    height: 247px;
-    background-repeat: no-repeat;
-    padding: 5px;
-    border-radius: 3px;
-    opacity: 0.8;
-    border-style: groove ;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-div#containerbox{
-  margin: 10px;
-}
-
-div#topnav{
-  position: absolute;
-  top: 20px;
-  right: 25px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-div#topnav a {
-  
-  /*background-color: #da552f;*/
-  font-family: Arial, Helvetica, sans-serif;
-  font-variant-caps: all-small-caps;
-  color: #fff;
-  padding: 14px 16px;
-  font-size: 20px;
-  text-decoration: none;
-}
-
-div#topnav a:hover {
-  border-bottom-style: groove;
-  font-style: oblique;
-  color: #fff;
-  border-bottom-color: #000;
-  /*border-color: rgb(155, 137, 125);*/
-}
-
-div#topnav a:hover menu {
+header.banner {
+  align-items: center;
+  background-image: url("./images/top_portal_faturamento.png") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  height: 320px;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
   position: relative;
-  visibility: visible;
-  cursor: pointer;
-  width: 160px;
-  background-color: #555;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 0;
-  position: absolute;
+  width: 100%;
+  opacity: 0.8;
+  font: 18px helvetica, sans-serif;
+}
+nav.menu{
+  align-items: center;
+  background: #12121232;
+  display: flex;
+  flex-direction: row;
+  height: 42px;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0 32px;
+  position: fixed;
+  top: 0px;
+  width: 95%;
   z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
 }
 
-div#topnav menu::after {
-  content: "Teste";
-  position: absolute;
-  top: 100%;
-  right:50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 /*transparent transparent transparent*/;
+nav.menu .home{
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 0 6px;
+  padding: 4px 12px;
+  font-size: 18px; 
+  color: black;
+  text-decoration: none;
+  line-height: 25px;
+  border-radius: 4px;
 }
 
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-div#topnav .shows {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s
+
+.main-header:hover {
+  background-color: black;
+  color: black;
 }
 
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 1;}
-  to {opacity: 1;}
+.banner a.home   {
+  
+  color: white;
 }
 
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
-}
 
-div#nome{
-  position: absolute;
-  top: 200px;
-  right: 40px;
-  font-size: 18px;
-  color: orange;
+@media screen and (max-width: 500px) {
+  .banner .main-header {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .main-header {
+    float: none;
+  }
 }
 

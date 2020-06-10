@@ -13,7 +13,7 @@ class Router {
             let userName = req.body.userName;
             let password = req.body.password;
             
-            console.log(userName,password);
+            
             userName = userName.toLowerCase();
 
             if (userName.length > 12 || password.length > 12){
@@ -36,7 +36,7 @@ class Router {
                 }
                 //Found 1 user with this username
                 if (data && data.length === 1 ){
-                    
+                    console.log(password,data[0].password)
                     bcrypt.compare(password, data[0].password, (bcryptErr, verified) => {
                        if (verified){
                            // the data[0].userApp_id
@@ -45,13 +45,16 @@ class Router {
                            res.json({
                                success:true,
                                userName: data[0].userApp_username
+                               
                            });
+                           console.log(data[0].password)
                            return ;
                        } else {
                            res.json({
                                success: false,
                                msg: 'Invalid Password'
                            });
+                           
                        }
                     });
 
