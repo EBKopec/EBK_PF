@@ -1,0 +1,42 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.info{
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: 2% 15%;
+}
+.content_info{
+    padding: 15px;
+    border-radius: 5px;
+    margin: 16px 25px 5px;
+    border: 0.5px solid #DDD;    
+}
+.content_info ul{
+    list-style: none;
+    color: #999;
+}
+
+.content_info p{
+    font-size: 20px;
+}
+
+.info .content_info_child{
+    display: flex;
+    justify-content: flex-start;
+}
+.info a{
+    margin-left: 25px;
+    margin-bottom: 25px;
+    padding: 8px 18px;
+    font-size: 16px;
+    border-radius: 5px;
+    background: #da552f;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}

@@ -1,0 +1,56 @@
+body{
+    margin: 0;
+    padding: 0;
+    
+}
+
+.main-extension{
+    width: 700px;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 16px 25px 5px;
+    height: 500px;
+    border: 0.5px solid #DDD;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.extension{
+    position: relative;
+    align-items: center;
+    display: flex;
+}
+
+.extension .selectedYear, .selectedMonth{
+    width: 200px;
+    padding: 10px;
+}
+.extension button{
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    background: none;
+    border: 2px solid #da552f;
+    color: #da552f;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: inset 0 0 20px rgba(218,85,47, 0);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+    
+}
+
+.extension button:hover{
+    background-color: #da552f;
+    color: #FFF;
+    box-shadow: inset 0 0 20px rgba(218,85,47, 1), 0 0 20px rgba(218,85,47, 1);
+    outline-color: rgba(255,255,255, 1);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+    cursor: pointer;
+}
