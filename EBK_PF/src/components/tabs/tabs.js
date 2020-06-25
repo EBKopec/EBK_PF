@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes, { array } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Tab from './tab';
 import './styles.css'

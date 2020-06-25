@@ -15,5 +15,8 @@ routes.get("/content/:id/maincontent", ContentController.indexMainContent);
 routes.get("/content/:id", ContentController.showMainContent);
 routes.post("/maincontent", ContentController.createMainContent);
 
+//views
+routes.get("/billing", ContentController.showBillingPMPG);
+routes.get("/pmpg_0800", ContentController.showBillingPMPG_0800);
 
 module.exports = routes;

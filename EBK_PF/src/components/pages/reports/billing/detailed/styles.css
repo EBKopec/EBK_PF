@@ -1,0 +1,49 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+tr td:first-child, tr th:first-child { 
+	font-weight: bold;
+	font-size: 14px;
+	text-align: center;
+	padding-right: 10px;
+	width: 680px; 
+}
+
+td {
+    height: 20px;
+    font-size: 12px;
+}
+.actions{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    position: relative;
+    bottom: -5px;
+    width: 100%;
+}
+
+.actions button{
+    padding: 10px;
+    border-radius: 5px;
+    border: 0;
+    background: #da552f;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+.actions button[disabled]{
+    opacity: 0.5;
+    cursor: default;
+
+}
+.actions button[disabled]:hover{
+    opacity: 0.5;
+    cursor:not-allowed;
+}
+.actions button:hover{
+    opacity: 0.7;
+}

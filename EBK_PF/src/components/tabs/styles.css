@@ -6,7 +6,9 @@ body{
 .tab-list{
     border-bottom: 1px solid #ccc;
     padding-left: 0;
-    cursor: pointer;
+    padding-right: 0;
+    margin: 10px 10px ;
+
     
 }
 
@@ -23,8 +25,8 @@ body{
     background-color: white;
     border: solid #ccc;
     border-width: 1px 1px 0 1px;
-    cursor: pointer;
-    border-radius: 2px;
-    color: black
+    border-radius: 3px;
+    color: black;
+
 }
 

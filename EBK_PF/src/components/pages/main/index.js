@@ -47,7 +47,9 @@ export default class Main extends Component{
 
     render(){
         const { content, page, contentInfo} = this.state;
+        console.log(contentInfo)
         return (
+            
             <div className="box">
             <div className="content_rules">
                 {content.map( content => (
