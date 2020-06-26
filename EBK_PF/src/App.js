@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Body from './components/body/index';
+import Body from './components/body';
 import './styles.css'
 
 

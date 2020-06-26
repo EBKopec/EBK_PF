@@ -97,3 +97,7 @@ div.hero {
   min-width: 270px;
   height: 86px;
 }
+
+.link{
+  text-decoration: none;
+}

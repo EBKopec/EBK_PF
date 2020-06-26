@@ -6,6 +6,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText'; 
 import Report from '@material-ui/icons/Description';
+import { Link } from 'react-router-dom';
 //import { Link } from 'react-router-dom';
 
 import './styles.css';
@@ -73,19 +74,21 @@ export default function CustomizedMenus(){
                         keepMounted
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
-                        >
-                            <StyledMenuItem href="/extension">
+                        ><StyledMenuItem>
                                 <ListItemIcon>
                                     <Report fontSize="small"/>
                                 </ListItemIcon>
-                                <ListItemText primary="Relatório de Ramais"/>
+                                <Link className="link" to={`/extension`}>
+                                    <ListItemText primary="Relatório de Ramais"/>
+                                </Link>
                             </StyledMenuItem>
-
                             <StyledMenuItem>
                                 <ListItemIcon>
                                     <Report fontSize="small"/>
                                 </ListItemIcon>
-                                <ListItemText primary="Relatório Faturamento"/>
+                                <Link className="link" to={`/billing`}>
+                                    <ListItemText primary="Relatório Faturamento"/>
+                                </Link>
                             </StyledMenuItem>
                         </StyledMenu>
         </nav>
