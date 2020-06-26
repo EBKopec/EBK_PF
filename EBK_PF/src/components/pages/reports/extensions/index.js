@@ -126,6 +126,7 @@ export default class Extensions extends Component {
                         placeholder="Selecione o Mês"
                         isSearchable/>
                     <button className="findButton">Buscar</button>
+                    <button className="download">Download</button>
                 </div>
                 <div>
                     <Tabs>

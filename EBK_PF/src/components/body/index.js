@@ -12,7 +12,6 @@ class Body extends Component{
     return (
         <div className="main_body">
             <Banner/>
-            {/*<Main/>*/}
             <Routes/>
         </div>
         );

@@ -8,7 +8,7 @@ class App extends Component {
   //Method to login
  return (
         <div className="App">      
-            <Body />
+            <Body/>
         </div>
       );
     }

@@ -96,7 +96,7 @@ export default class Detailed extends Component {
                             <button disabled={page === 1} onClick={this.firstPage}>Primera Página</button>
                             <button disabled={page === 1} onClick={this.prevPage}>Anterior</button>
                             <button disabled={true}>Página {page} de {contentInfo.pages}</button>
-                            <input defaultValue="0" name="page" ref="newPage" />
+                            <input placeholder="Insira a Página" name="page" ref="newPage" />
                             <button onClick={this.findPage}>Buscar</button>
                             <button disabled={page === contentInfo.pages} onClick={this.nextPage}>Próximo</button>
                             <button disabled={page === contentInfo.pages} onClick={this.lastPage}>Última Página</button>
