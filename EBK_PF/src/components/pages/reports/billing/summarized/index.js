@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import Select from 'react-select';
 import Tabs from '../../../../tabs/tabs';
 import Detail from '../detailed/index';
-// import Api from '../../../services/api_ramais';
-// import Table from '../table/index';
+import Currency from 'react-currency-format';
 import Data from './data.json';
 import './styles.css';
 
@@ -30,34 +29,22 @@ const month = [
                 {value:11,  label:'Novembro'},
                 {value:12,  label:'Dezembro'}];
 
-// const heads = {
-//     group:"Grupo",
-//     STFC: "Serviço Total", 
-//     ext: "Ramais" ,
-//     total: "Total Consumido",
-//     local_minutes:"Minutos Local",
-//     local_values: "Valor Local", 
-//     ldn_minutes:"Minutos LDN",  
-//     ldn_values: "Valor LDN",
-//     movel_minutes:"Minutos Móvel",
-//     movel_values: "Valor Móvel",
-//     local_minutes_exc:"Excedentes Minutos Local",
-//     local_values_exc: "Excendentes Valores Local", 
-//     ldn_minutes_exc:"Excedentes Minutos LDN",
-//     ldn_values_exc: "Excendentes Valores LDN",
-//     movel_minutes_exc:"Excedentes Minutos Móvel",
-//     movel_values_exc: "Excedentes Valores Móvel"
-// }
 
 export default class Billing extends Component {
     state = {
         selectedYear: null,
         selectedMonth: null,
         info: [],
+        total: 0,
+        total_ext: 0,
+        total_llm: 0,
+        total_exc: 0,
+        total_min: 0,
         page: 1,
     };
     componentDidMount(){
         this.mapping();
+        this.total();
     }
 
     yearChange = selectedYear =>{
@@ -76,8 +63,8 @@ export default class Billing extends Component {
                             <ul className="lst">
                                 <li>Serviço: {info.service}</li>
                                 <li>Ramais: {info.ext}</li>
-                                <li>Total Consumido: {info.total}</li>
-                                <li>Total Serviço: {info.total_STFC}</li>
+                                <li>Total Ramais: {this.mask(info.total,",","R$ ",".")}</li>
+                                <li>Total Serviço: {this.mask(info.total_STFC,",","R$ ",".")}</li>
                             </ul>
                         </div>
                         <hr/>
@@ -98,25 +85,40 @@ export default class Billing extends Component {
                                 <tbody className="bodyT">
                                     <tr>
                                         <td>Local</td>
-                                        <td>{info.local_minutes}</td>
-                                        <td>{info.local_values}</td>
-                                        <td>{info.local_minutes_exc}</td>
-                                        <td>{info.local_values_exc}</td>
+                                        <td>{this.mask(info.local_minutes,":"," ")}</td>
+                                        <td>{this.mask(info.local_values,",","R$ ",".")}</td>
+                                        <td>{this.mask(info.local_minutes_exc,":"," ")}</td>
+                                        <td>{this.mask(info.local_values_exc,",","R$ ",".")}</td>
 
                                     </tr>
                                     <tr>
                                         <td>LDN</td>
-                                        <td>{info.ldn_minutes}</td>
-                                        <td>{info.ldn_values}</td>
-                                        <td>{info.ldn_minutes_exc}</td>
-                                        <td>{info.ldn_values_exc}</td>
+                                        <td>{this.mask(info.ldn_minutes,":"," ")}</td>
+                                        <td>{this.mask(info.ldn_values,",","R$ ",".")}</td>
+                                        <td>{this.mask(info.ldn_minutes_exc,":"," ")}</td>
+                                        <td>{this.mask(info.ldn_values_exc,",","R$ ",".")}</td>
                                     </tr>
                                     <tr>
                                         <td>Móvel</td>
-                                        <td>{info.movel_minutes}</td>
-                                        <td>{info.movel_values}</td>
-                                        <td>{info.movel_minutes_exc}</td>
-                                        <td>{info.movel_values_exc}</td>
+                                        <td>{this.mask(info.movel_minutes,":"," ")}</td>
+                                        <td>{this.mask(info.movel_values,",","R$ ",".")}</td>
+                                        <td>{this.mask(info.movel_minutes_exc,":"," ")}</td>
+                                        <td>{this.mask(info.movel_values_exc,",","R$ ",".")}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td>{this.mask( info.local_minutes 
+                                                      + info.ldn_minutes 
+                                                      + info.movel_minutes,":"," ")}</td>
+                                        <td>{this.mask( info.local_values 
+                                                      + info.ldn_values 
+                                                      + info.movel_values,",","R$ ",".")}</td>
+                                        <td>{this.mask(this.minutes(( info.local_minutes_exc
+                                                          + info.ldn_minutes_exc
+                                                          + info.movel_minutes_exc)),":"," ")}</td>
+                                        <td>{this.mask( info.local_values_exc
+                                                      + info.ldn_values_exc
+                                                      + info.movel_values_exc,",","R$ ",".")}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -126,10 +128,45 @@ export default class Billing extends Component {
         
         this.setState({info: response})
     }
+    minutes = (time) =>{
+        const part = (String(time === 0 ? '0.0' : time).split('.'))
+        const total_time = ((parseInt(part[0])) === 0 ? 0 : (parseInt(part[0]))) + ((parseInt(part[1]) / 60) === 0 ? 0 : (parseInt(part[1]) / 60) )
+        return total_time
+    }
+    total = () => {
+        const total_geral = (Data.docs.map((ttl) => (ttl.total_STFC)).reduce((tt, next) => (tt + next)))
+        const total_ext = (Data.docs.map((ttl) => (ttl.total)).reduce((tt, next) => (tt + next)))
+        const total_llm = (Data.docs.map((ttl) => ( ttl.local_values
+                                                  + ttl.ldn_values
+                                                  + ttl.movel_values)).reduce((tt, next) => (tt + next)))
+        const total_exc = (Data.docs.map((ttl) => ( ttl.local_values_exc
+                                                  + ttl.ldn_values_exc
+                                                  + ttl.movel_values_exc))).reduce((tt, next) => (tt + next))
+        const total_min = (Data.docs.map((ttl) => ( this.minutes(ttl.local_minutes_exc
+                                                  + ttl.ldn_minutes_exc
+                                                  + ttl.movel_minutes_exc)
+                                                  ))).reduce((tt, next) => (tt + next))
+        console.log(total_min)
+        this.setState({total:total_geral
+                     , total_ext: total_ext
+                     , total_llm: total_llm
+                     , total_exc: total_exc
+                     , total_min: total_min})
+    }
+
+    mask = (Value,Decimal,Prefix,TS) => {
+        const valor = (<Currency displayType={'text'}
+                            value={Value}
+                            thousandSeparator={TS}
+                            decimalSeparator={Decimal}
+                            prefix={Prefix}
+                            decimalScale={2}
+                            fixedDecimalScale={true}/>)
+        return valor
+    }
 
     render(){
-        const { selectedYear, selectedMonth, info} = this.state;
-        //console.log(info);
+        const { selectedYear, selectedMonth, info, total, total_ext, total_llm, total_exc, total_min} = this.state;
         return(
             <div className="main-billing">
                 <h1>Relatório de Faturamento</h1>
@@ -154,8 +191,16 @@ export default class Billing extends Component {
                 <div>
                     <Tabs>
                         <div label="Consolidado">
+                            <div className="total">
+                                <h1>Total Geral</h1>
+                                <p>Total Serviço:{this.mask(total,",","R$ ",".")}</p>
+                                <p>Total Ramais: {this.mask(total_ext,",","R$ ",".")}</p>
+                                <p>Total Franquias: {this.mask(total_llm,",","R$ ",".")}</p>
+                                <p>Total Excedentes: {this.mask(total_exc,",","R$ ",".")}</p>
+                                <p>Total Minutos: {this.mask(this.minutes(total_min),":"," ")}</p>
+                            </div>
                             <div className="flex">
-                            {info}
+                                {info}
                             </div>
                             See you Later,<em> Alligator...</em>
                         </div>

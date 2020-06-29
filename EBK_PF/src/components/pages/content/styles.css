@@ -7,7 +7,8 @@ body{
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 2% 15%;
+    margin: auto;
+    width: 66%;
 }
 .content_info{
     padding: 15px;
@@ -27,6 +28,7 @@ body{
 .info .content_info_child{
     display: flex;
     justify-content: flex-start;
+    padding: 10px 0;
 }
 .info a{
     margin-left: 25px;

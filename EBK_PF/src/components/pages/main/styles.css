@@ -24,12 +24,11 @@ body{
     /*margin-bottom: 20px;*/
     width: 320px;
     height: 200px;
-    margin: 10px 10px;
+    margin: 30px 10px;
     justify-content: center;
     text-align: center;
     display: flex;
     position: relative;
-    
 }
 
 .content_rules article p{
@@ -51,7 +50,6 @@ body{
     justify-content: center;
     align-items: center;
 }
-
 
 .content_rules article a{
     height: 42px;

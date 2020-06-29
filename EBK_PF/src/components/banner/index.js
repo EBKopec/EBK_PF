@@ -58,7 +58,9 @@ export default function CustomizedMenus(){
     return (
         <header className="box">
             <nav className="menu">
-                    <Button className="home" href="/">HOME</Button>
+                    <Link className="link" to={`/`}>
+                        <Button className="home">HOME</Button>
+                    </Link>
                     <Button className="menus"
                     aria-controls="customized-menu"
                     aria-haspopup="true"

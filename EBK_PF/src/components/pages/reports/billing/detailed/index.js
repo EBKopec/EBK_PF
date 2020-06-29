@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Tabs from '../../../../tabs/tabs';
 import Table from '../../table/table2';
 import Data from '../../../../services/api';
-import { JsonToTable } from "react-json-to-table";
+// import { JsonToTable } from "react-json-to-table";
 import './styles.css';
 
 const heads = ["TIPO",
