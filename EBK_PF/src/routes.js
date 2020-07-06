@@ -14,6 +14,7 @@ const Routes = () => (
             <Route exact path="/content/:id" component={Content} />
             <Route exact path="/extension" component={Extensions}/>
             <Route exact path="/billing" component={Billing}/>
+            {/* <Route exact path="/billing/:id" component={Billing}/> */}
         </Switch>
     </BrowserRouter>
 );

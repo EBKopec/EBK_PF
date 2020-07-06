@@ -10,10 +10,44 @@ tr td:first-child, tr th:first-child {
 	padding-right: 10px;
 	width: 680px; 
 }
-
 td {
     height: 20px;
     font-size: 12px;
+}
+
+.MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit.activated{
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    border-width: 1px 1px 0 1px;
+    color: #326AAA;
+    display: inline-block;
+    font-style: italic;
+    font-weight: bolder;
+    margin-bottom: -1px auto;
+    min-width: 12.2%;
+    padding: 0.15rem 0.2rem;
+
+}
+
+button.MuiButtonBase-root.MuiTab-root.MuiTab-textColorInherit.tab{
+    border: 1px solid;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: -1px auto;
+    padding: 0.15rem 0.2rem;
+    border-width: 0 0 1px 0;
+    min-width: 12.2%;
+    cursor: pointer;
+    color:#326AAA;
+}
+
+.table{
+    margin: 5px 5px auto;
+}
+.groups .tabs{
+    margin: 0px 10px auto ;
+    width: 100%;
 }
 .actions{
     display: flex;

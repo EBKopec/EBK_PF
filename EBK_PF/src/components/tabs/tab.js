@@ -14,18 +14,14 @@ export default class Tab extends Component {
     }
 
     render(){
-        const {
-            onClick,
-            props: {
-                activeTab,
-                label
-            },
-        } = this;
-
+        const {onClick, props: { activeTab,
+                                 label},
+                } = this;
         let className = 'tab-list-item';
 
         if(activeTab === label){
             className += ' tab-list-active';
+            // console.log(label, name)
         }
 
         return (

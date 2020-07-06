@@ -146,7 +146,6 @@ export default class Billing extends Component {
                                                   + ttl.ldn_minutes_exc
                                                   + ttl.movel_minutes_exc)
                                                   ))).reduce((tt, next) => (tt + next))
-        console.log(total_min)
         this.setState({total:total_geral
                      , total_ext: total_ext
                      , total_llm: total_llm
@@ -207,7 +206,7 @@ export default class Billing extends Component {
                         
                         <div label="Detalhado">
                             <div className="flex">
-                               <Detail className="Detail"/>   
+                               <Detail />   
                             </div>
                         </div>
 

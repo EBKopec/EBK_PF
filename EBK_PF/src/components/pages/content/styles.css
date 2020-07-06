@@ -14,17 +14,21 @@ body{
     padding: 15px;
     border-radius: 5px;
     margin: 16px 25px 5px;
-    border: 0.5px solid #DDD;    
+    border: 0.5px solid #DDD;   
+    background-color: #fafafa; 
 }
 .content_info ul{
     list-style: none;
     color: #999;
+    margin: 10px;
 }
-
+.content_info li{
+    margin: 1px;;
+}
 .content_info p{
     font-size: 20px;
+    margin: 5px 20px;
 }
-
 .info .content_info_child{
     display: flex;
     justify-content: flex-start;
@@ -36,7 +40,9 @@ body{
     padding: 8px 18px;
     font-size: 16px;
     border-radius: 5px;
-    background: #da552f;
+    /* background: #da552f; */
+    background: #ff9b42;
+
     color: #FFF;
     font-weight: bold;
     cursor: pointer;

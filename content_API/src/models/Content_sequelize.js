@@ -19,5 +19,5 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.content = ContentModel(sequelize, Sequelize);
-
+db.sequelize.sync();
 module.exports = db;

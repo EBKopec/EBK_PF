@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./src/models/Content_sequelize');
+// const db = require('./src/models/Content_sequelize');
 const app = express();
 const helmet = require('helmet');
 
 
-db.sequelize.sync();
+
 //db.sequelize.sync({ force: true }).then(() => {
  //   console.log("Drop and re-sync db.");
  // });

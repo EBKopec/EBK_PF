@@ -35,8 +35,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.1",
     "react-select": "^3.1.0",
+    "react-tab": "^1.0.0",
     "react-table": "^7.2.0",
     "react-table-v6": "^6.8.6",
+    "react-tabs": "^3.1.1",
     "styled-components": "^5.1.1"
   },
   "scripts": {

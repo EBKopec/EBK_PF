@@ -7,6 +7,7 @@ body{
     width: 66%;
     padding: 8px;
     border-radius: 5px;
+    background-color: #fafafa;
     margin: 16px auto;
     height: 100%;
     border: 0.5px solid #DDD;
@@ -41,8 +42,8 @@ body{
     border-radius: 5px;
     border: 0;
     background: none;
-    border: 2px solid #da552f;
-    color: #da552f;
+    border: 2px solid #ff9b42;
+    color: #ff9b42;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -83,12 +84,11 @@ body{
     justify-content: space-between;
     margin: 1px;
     background-color: #EFF0F1;
-}
-p {
     background-image: -webkit-linear-gradient(-90deg,    transparent 0%,    transparent 50%, white 50%, white 100%),
     -webkit-linear-gradient(  0deg, rgba(0,0,0,.1) 0%, #EFF0F1 50%, white 50%, white 100%);
 background-size:.25em .25em;
 }
+
 
 .lst{
     list-style: none;

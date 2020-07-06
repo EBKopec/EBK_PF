@@ -21,7 +21,7 @@ export default class Content extends Component{
     } 
 
     render(){
-        const { content} = this.state;
+        const { content } = this.state;
         console.log(content);
         return (
             <div className="info">

@@ -23,14 +23,10 @@ export default class Tabs extends Component {
 
     render(){
         const { onClickTabItem,
-                props:{
-                    children
-                },
-                state: {
-                    activeTab,
-                }
-            } = this;
-
+                props:{children},
+                state: {activeTab},
+              } = this;
+        // console.log(tabName)
         return (
             <div className="tabs">
                 <ol className="tab-list">
@@ -48,6 +44,7 @@ export default class Tabs extends Component {
                 <div className="tab-content">
                     {children.map((child) => {
                         if(child.props.label !== activeTab) return undefined;
+                        // console.log(child.props.children);
                         return child.props.children;
                     })}
                 </div>

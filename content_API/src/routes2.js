@@ -17,6 +17,8 @@ routes.post("/maincontent", ContentController.createMainContent);
 
 //reports
 routes.get("/billing", ContentController.showBillingPMPG);
+routes.post("/billing/:id", ContentController.showBillingPMPGParam);
+// console.log("Rota:", routes.get("/billing/:id", ContentController.showBillingPMPGParam));
 routes.get("/pmpg_0800", ContentController.showBillingPMPG_0800);
 
 module.exports = routes;

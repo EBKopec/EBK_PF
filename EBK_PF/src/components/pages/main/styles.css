@@ -53,10 +53,10 @@ body{
 
 .content_rules article a{
     height: 42px;
-    border: 2px solid #da552f;
+    border: 2px solid #f7a072;
     background: none;
     margin-top: 10px; 
-    color: #da552f;
+    color: #f7a072;
     font-weight: bold;    
     font-size: 16px;
     text-decoration: none;
@@ -74,9 +74,10 @@ body{
 }
 
 .content_rules article a:hover{
-    background-color: #da552f;
+    background-color: #ff9b42;
     color: #FFF;
     box-shadow: inset 0 0 20px rgba(218,85,47, 1), 0 0 20px rgba(218,85,47, 1);
+    /* box-shadow: inset 0 0 20px rgba(255,155,66, 1), 0 0 20px rgba(255,155,66, 1);  */
     outline-color: rgba(255,255,255, 1);
     outline-offset: 15px;
     text-shadow: 1px 1px 2px #427388;
@@ -96,7 +97,7 @@ body{
     padding: 10px;
     border-radius: 5px;
     border: 0;
-    background: #da552f;
+    background: #ff9b42;
     color: #FFF;
     font-size: 16px;
     font-weight: bold;

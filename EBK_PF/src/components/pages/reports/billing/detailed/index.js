@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Tabs from '../../../../tabs/tabs';
+// import Tabs from '../../../../tabs/tabs';
+import { Tab, Tabs} from '@material-ui/core';
 import Table from '../../table/table2';
 import Data from '../../../../services/api';
-// import { JsonToTable } from "react-json-to-table";
+
 import './styles.css';
 
 const heads = ["TIPO",
@@ -12,14 +13,19 @@ const heads = ["TIPO",
             "DESTINO",
             "CIDADE DESTINO", 
             "DURAÇÃO",  
-            "CUSTO"
+            "CUSTO ( R$ )"
         ]
 
 export default class Detailed extends Component {
-    state = {
-            content: [],
-            contentInfo: {},
-            page: 1
+    constructor(){
+        super()
+        this.state = {
+                content: [],
+                contentInfo: {},
+                page: 1,
+                tabIndex: 0,
+                setValue:0
+        }
     }
 
     componentDidMount() {
@@ -28,11 +34,12 @@ export default class Detailed extends Component {
 
     loadContent = async (page = 1) => {
         try {
-            const response = await Data.get(`/billing?page=${page}`);
-            // console.log("Response", response); 
+            const route = this.state.setValue === null ? null : this.state.setValue;
+            const post = await Data.post(`/billing/${route}?page=${page}`);
+            const { docs, ...contentInfo } = post.data
             // console.log("Docs", response.data);
-            const { docs, ...contentInfo } = response.data;
-            this.setState({ content: docs, contentInfo, page});
+            // const { docs, ...contentInfo } = response.data;
+            this.setState({ content: docs, contentInfo, page, route});
         } catch (error) {
             console.log(error);
         }
@@ -42,7 +49,7 @@ export default class Detailed extends Component {
     prevPage = () => {
         const {page} = this.state;
         //contentInfo
-        if (page === 1) return;
+        if (page <= 1) return;
         const pageNumber = page - 1;
         // console.log(`Current Page: ${page}, Previous Page ${pageNumber}`)
         this.loadContent(pageNumber);
@@ -51,7 +58,7 @@ export default class Detailed extends Component {
     nextPage = () => {
         const {page, contentInfo} = this.state;
         // console.log("Paginas", page, contentInfo);
-        if (page === contentInfo.pages) return;
+        if (page >= contentInfo.pages) return;
         const pageNumber = page + 1;
         // console.log(`Current Page: ${page}, Next Page: ${pageNumber}`);
         this.loadContent(pageNumber);
@@ -59,14 +66,14 @@ export default class Detailed extends Component {
 
     firstPage = () =>{
         const {page} = this.state;
-        if (page === 1) return;
+        if (page <= 1) return;
         const pageNumber = 1;
         this.loadContent(pageNumber);
     }
    
     lastPage = () => {
         const {page, contentInfo} = this.state;
-        if (page === contentInfo.pages) return;
+        if (page >= contentInfo.pages) return;
         // console.log('Last Page:', page);
         this.loadContent(contentInfo.pages);
     };
@@ -78,66 +85,51 @@ export default class Detailed extends Component {
             return;
         }
             const page = this.refs.newPage.value;
-            console.log(typeof parseInt(page))
+            // console.log(typeof parseInt(page))
             this.loadContent(parseInt(page));
     };
 
+    handleChange = async (event, newValue) => {
+        try {
+
+            const page = 1;
+            const value = newValue;
+            const post = await Data.post(`/billing/${value}?page=${page}`);
+            const { docs, ...contentInfo } = post.data
+            this.setState({setValue:value, content: docs, contentInfo, page});
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    
     render() {
-        const { content, page, contentInfo } = this.state;
-        // console.log("Console: ", contentInfo.pages);
+        const { content, page, contentInfo} = this.state;
+        console.log("Estado:", this.state);
         return (
-            <div>
-                <Tabs className="tb">
-                    <div label="PMPG">
-                        <div>
-                            <Table Header={heads} data={content} />
-                        </div>
-                        <div className="actions">
-                            <button disabled={page === 1} onClick={this.firstPage}>Primera Página</button>
-                            <button disabled={page === 1} onClick={this.prevPage}>Anterior</button>
-                            <button disabled={true}>Página {page} de {contentInfo.pages}</button>
-                            <input placeholder="Insira a Página" name="page" ref="newPage" />
-                            <button onClick={this.findPage}>Buscar</button>
-                            <button disabled={page === contentInfo.pages} onClick={this.nextPage}>Próximo</button>
-                            <button disabled={page === contentInfo.pages} onClick={this.lastPage}>Última Página</button>
-                        </div>
-                    </div>
-                    <div label="PMPG 0800">
-                        <div>
-                            <h1>Teste PMPG 0800</h1>
-                        </div>
-                    </div>
-                    <div label="SME ESCOLA">
-                        <div>
-                            <h1>Teste SME ESCOLA</h1>
-                        </div>
-                    </div>
-                    <div label="SME CMEI">
-                        <div>
-                            <h1>Teste SME CMEI</h1>
-                        </div>
-                    </div>
-                    <div label="FMS PAB">
-                        <div>
-                            <h1>Teste FMS PAB</h1>
-                        </div>
-                    </div>
-                    <div label="FMS PAB 0800">
-                        <div>
-                            <h1>Teste FMS PAB 0800</h1>
-                        </div>
-                    </div>
-                    <div label="FMS AIH">
-                        <div>
-                            <h1>Teste FMS AIH</h1>
-                        </div>
-                    </div>
-                    <div label="FMS AIH 0800">
-                        <div>
-                            <h1>Teste FMS AIH 0800</h1>
-                        </div>
-                    </div>
+            <div className="groups">
+                <Tabs className="tabs" onChange={this.handleChange}>
+                    <Tab className={this.state.setValue === 0 ? "activated" : "tab"} label="PMPG"/>
+                    <Tab className={this.state.setValue === 1 ? "activated" : "tab"} label="PMPG 0800"/>
+                    <Tab className={this.state.setValue === 2 ? "activated" : "tab"} label="SME ESCOLA"/>
+                    <Tab className={this.state.setValue === 3 ? "activated" : "tab"} label="SME CMEI"/>
+                    <Tab className={this.state.setValue === 4 ? "activated" : "tab"} label="FMS PAB"/>
+                    <Tab className={this.state.setValue === 5 ? "activated" : "tab"} label="FMS PAB 0800"/>
+                    <Tab className={this.state.setValue === 6 ? "activated" : "tab"} label="FMS AIH"/>
+                    <Tab className={this.state.setValue === 7 ? "activated" : "tab"} label="FMS AIH 0800"/>
                 </Tabs>
+                <div className="table">
+                    <Table Header={heads} data={content}/>
+                </div>
+                <div className="actions">
+                    <button disabled={page <= 1} onClick={this.firstPage}>Primera Página</button>
+                    <button disabled={page <= 1} onClick={this.prevPage}>Anterior</button>
+                    <button disabled={true}>Página {page} de {contentInfo.pages}</button>
+                    <input placeholder="Insira a Página" name="page" ref="newPage" />
+                    <button onClick={this.findPage}>Buscar</button>
+                    <button disabled={page >= contentInfo.pages} onClick={this.nextPage}>Próximo</button>
+                    <button disabled={page >= contentInfo.pages} onClick={this.lastPage}>Última Página</button>
+                </div>
+                
             </div>
         )
     }
