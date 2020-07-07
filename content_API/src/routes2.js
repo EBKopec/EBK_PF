@@ -11,14 +11,14 @@ routes.post("/content", ContentController.create);
 routes.put("/content/:id", ContentController.update);
 routes.delete("/content/:id", ContentController.delete);
 
+//Content
 routes.get("/content/:id/maincontent", ContentController.indexMainContent);
 routes.get("/content/:id", ContentController.showMainContent);
 routes.post("/maincontent", ContentController.createMainContent);
 
 //reports
+//Detailed
 routes.get("/billing", ContentController.showBillingPMPG);
 routes.post("/billing/:id", ContentController.showBillingPMPGParam);
-// console.log("Rota:", routes.get("/billing/:id", ContentController.showBillingPMPGParam));
-routes.get("/pmpg_0800", ContentController.showBillingPMPG_0800);
 
 module.exports = routes;

@@ -104,7 +104,7 @@ export default class Detailed extends Component {
     
     render() {
         const { content, page, contentInfo} = this.state;
-        console.log("Estado:", this.state);
+        // console.log("Estado:", content);
         return (
             <div className="groups">
                 <Tabs className="tabs" onChange={this.handleChange}>
