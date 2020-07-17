@@ -24,7 +24,7 @@ export default class Detailed extends Component {
                 contentInfo: {},
                 page: 1,
                 tabIndex: 0,
-                setValue:0
+                selectedTab:0
         }
     }
 
@@ -34,7 +34,7 @@ export default class Detailed extends Component {
 
     loadContent = async (page = 1) => {
         try {
-            const route = this.state.setValue === null ? null : this.state.setValue;
+            const route = this.state.selectedTab === null ? null : this.state.selectedTab;
             const post = await Data.post(`/billing/${route}?page=${page}`);
             const { docs, ...contentInfo } = post.data
             // console.log("Docs", response.data);
@@ -96,7 +96,7 @@ export default class Detailed extends Component {
             const value = newValue;
             const post = await Data.post(`/billing/${value}?page=${page}`);
             const { docs, ...contentInfo } = post.data
-            this.setState({setValue:value, content: docs, contentInfo, page});
+            this.setState({selectedTab:value, content: docs, contentInfo, page});
         } catch (error) {
             console.log(error);
         }
@@ -107,15 +107,15 @@ export default class Detailed extends Component {
         // console.log("Estado:", content);
         return (
             <div className="groups">
-                <Tabs className="tabs" onChange={this.handleChange}>
-                    <Tab className={this.state.setValue === 0 ? "activated" : "tab"} label="PMPG"/>
-                    <Tab className={this.state.setValue === 1 ? "activated" : "tab"} label="PMPG 0800"/>
-                    <Tab className={this.state.setValue === 2 ? "activated" : "tab"} label="SME ESCOLA"/>
-                    <Tab className={this.state.setValue === 3 ? "activated" : "tab"} label="SME CMEI"/>
-                    <Tab className={this.state.setValue === 4 ? "activated" : "tab"} label="FMS PAB"/>
-                    <Tab className={this.state.setValue === 5 ? "activated" : "tab"} label="FMS PAB 0800"/>
-                    <Tab className={this.state.setValue === 6 ? "activated" : "tab"} label="FMS AIH"/>
-                    <Tab className={this.state.setValue === 7 ? "activated" : "tab"} label="FMS AIH 0800"/>
+                <Tabs className="tabs" onChange={this.handleChange} value={this.state.selectedTab}>
+                    <Tab className={this.state.selectedTab === 0 ? "activated" : "tab"} label="PMPG"/>
+                    <Tab className={this.state.selectedTab === 1 ? "activated" : "tab"} label="PMPG 0800"/>
+                    <Tab className={this.state.selectedTab === 2 ? "activated" : "tab"} label="SME ESCOLA"/>
+                    <Tab className={this.state.selectedTab === 3 ? "activated" : "tab"} label="SME CMEI"/>
+                    <Tab className={this.state.selectedTab === 4 ? "activated" : "tab"} label="FMS PAB"/>
+                    <Tab className={this.state.selectedTab === 5 ? "activated" : "tab"} label="FMS PAB 0800"/>
+                    <Tab className={this.state.selectedTab === 6 ? "activated" : "tab"} label="FMS AIH"/>
+                    <Tab className={this.state.selectedTab === 7 ? "activated" : "tab"} label="FMS AIH 0800"/>
                 </Tabs>
                 <div className="table">
                     <Table Header={heads} data={content}/>

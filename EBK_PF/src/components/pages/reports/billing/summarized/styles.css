@@ -85,8 +85,11 @@ body{
     margin: 1px;
     background-color: #EFF0F1;
     background-image: -webkit-linear-gradient(-90deg,    transparent 0%,    transparent 50%, white 50%, white 100%),
-    -webkit-linear-gradient(  0deg, rgba(0,0,0,.1) 0%, #EFF0F1 50%, white 50%, white 100%);
+    -webkit-linear-gradient( 0deg, rgba(0,0,0,.1) 0%, #EFF0F1 50%, white 50%, white 100%);
 background-size:.25em .25em;
+}
+.ttl{
+    color: #999;
 }
 
 

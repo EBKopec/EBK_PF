@@ -28,11 +28,11 @@ const month = [
 
 
 const data = [
-    { name: 'PMPG',         ext: 816,   extProgress: 2, extActivated: 2, extDisconnected: 0 , extCanceled: 0},
-    { name: 'SME ESCOLA',   ext: 105,   extProgress: 0, extActivated: 0, extDisconnected: 0 , extCanceled: 0},
-    { name: 'SME CMEI',     ext: 62,    extProgress: 0, extActivated: 0, extDisconnected: 0 , extCanceled: 0},
-    { name: 'FMS PAB',      ext: 230,   extProgress: 4, extActivated: 4, extDisconnected: 0 , extCanceled: 0},
-    { name: 'FMS AIH',      ext: 139,   extProgress: 0, extActivated: 0, extDisconnected: 0 , extCanceled: 0},
+    { name: 'PMPG',         ext: 816,   extProgress: 2, extActivated: 2, extDisconnected: 0},
+    { name: 'SME ESCOLA',   ext: 105,   extProgress: 0, extActivated: 0, extDisconnected: 0},
+    { name: 'SME CMEI',     ext: 62,    extProgress: 0, extActivated: 0, extDisconnected: 0},
+    { name: 'FMS PAB',      ext: 230,   extProgress: 4, extActivated: 4, extDisconnected: 0},
+    { name: 'FMS AIH',      ext: 139,   extProgress: 0, extActivated: 0, extDisconnected: 0},
 ];
 
 const data2 = [
@@ -51,13 +51,6 @@ const data3 = [
     { name: 'FMS AIH',     extDisconnected: 0, disconnectedDate: '' },
 ];
 
-const data4 = [
-    { name: 'PMPG',        extCanceled: 0, canceledDate: '' },
-    { name: 'SME ESCOLA',  extCanceled: 0, canceledDate: '' },
-    { name: 'SME CMEI',    extCanceled: 0, canceledDate: '' },
-    { name: 'FMS PAB',     extCanceled: 0, canceledDate: '' },
-    { name: 'FMS AIH',     extCanceled: 0, canceledDate: '' },
-];
 
 const head = {
     name: 'Grupo',
@@ -65,7 +58,6 @@ const head = {
     extProgress: 'Ramais em Ativação',
     extActivated: 'Ramais Ativados no Mês',
     extDisconnected: 'Ramais Desconectados',
-    extCanceled: 'Ramais Cancelados',
 };
 
 const head2 = {
@@ -80,11 +72,6 @@ const head3 = {
     name: 'Grupo',
     extDisconnected: 'Ramais Desconectados',
     disconnectedDate: 'Data Desconexão',
-}
-const head4 = {
-    name: 'Grupo',
-    extCanceled: 'Ramais Cancelados',
-    canceledDate: 'Data Cancelamento',
 }
 
 export default class Extensions extends Component {
@@ -142,7 +129,7 @@ export default class Extensions extends Component {
                             </div>
                             <div className="end-service">
                                 <Table data={data3} head={head3}/>
-                                <Table data={data4} head={head4}/>
+                                {/* <Table data={data4} head={head4}/> */}
                             </div>
                             After 'while, <em>Crocodile</em>!
                         </div>

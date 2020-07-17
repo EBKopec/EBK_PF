@@ -11,7 +11,7 @@ module.exports = {
         const { page = 1 } = req.query;
         const content = await Content.Content.paginate({group: ['title_content','subtitle_content'],
             page, paginate:5});
-        console.log(res)
+        // console.log(res)
         return res.json(content);
     },
     async indexMainContent(req, res){
@@ -25,13 +25,13 @@ module.exports = {
         const content = await Content.Content.create({...req.body});
         const main_content = await Content.Main_Content.create({...req.body});
         const body = {content, main_content}
-        console.log(body)
-        return res.json(body)
+        // console.log(body)
+        return res.json(body);
     },
     async createMainContent(req, res){
         const main_content = await Content.Main_Content.create({...req.body});
 
-        return res.json(main_content)
+        return res.json(main_content);
     },
     async show(req, res) {
         //Show a single Content
@@ -55,7 +55,7 @@ module.exports = {
         //Delete Content
         await Content.Content.destroy(req.params.id);
 
-        return res.send()
+        return res.send();
     },
     async showBillingPMPG(req, res){
         const { page = 1 } = req.query;
@@ -76,7 +76,7 @@ module.exports = {
         const clause = { order: [
                                 ['ORIGEM', 'ASC'],
                                 ['DATA', 'ASC'],
-                                ['HORA', 'ASC']] ,page, paginate:10}
+                                ['HORA', 'ASC']] ,page, paginate:50};
         switch(data){
             case '0':
                 BillingDetailed = await Content.VW_pmpg.paginate(clause);

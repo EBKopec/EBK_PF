@@ -61,7 +61,7 @@ export default class Billing extends Component {
                         <div className="header">
                         <h5>{info.group}</h5>
                             <ul className="lst">
-                                <li>Serviço: {info.service}</li>
+                                <li>Serviços: {info.service}</li>
                                 <li>Ramais: {info.ext}</li>
                                 <li>Total Ramais: {this.mask(info.total,",","R$ ",".")}</li>
                                 <li>Total Serviço: {this.mask(info.total_STFC,",","R$ ",".")}</li>
@@ -192,11 +192,11 @@ export default class Billing extends Component {
                         <div label="Consolidado">
                             <div className="total">
                                 <h1>Total Geral</h1>
-                                <p>Total Serviço:{this.mask(total,",","R$ ",".")}</p>
-                                <p>Total Ramais: {this.mask(total_ext,",","R$ ",".")}</p>
-                                <p>Total Franquias: {this.mask(total_llm,",","R$ ",".")}</p>
-                                <p>Total Excedentes: {this.mask(total_exc,",","R$ ",".")}</p>
-                                <p>Total Minutos: {this.mask(this.minutes(total_min),":"," ")}</p>
+                                <p>Total Serviços:{this.mask(total,",","R$ ",".")}</p>
+                                <p className="ttl">Total Ramais: {this.mask(total_ext,",","R$ ",".")}</p>
+                                <p className="ttl">Total Franquias: {this.mask(total_llm,",","R$ ",".")}</p>
+                                <p className="ttl">Total Excedentes: {this.mask(total_exc,",","R$ ",".")}</p>
+                                <p className="ttl">Total Minutos: {this.mask(this.minutes(total_min),":"," ")}</p>
                             </div>
                             <div className="flex">
                                 {info}
