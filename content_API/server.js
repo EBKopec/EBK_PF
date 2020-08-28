@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 
-//Startin DB
+//Starting DB
 mongoose.connect('mongodb://localhost:27017/contentAPI', 
 { useNewUrlParser: true, 
   useUnifiedTopology: true }

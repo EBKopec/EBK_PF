@@ -2,8 +2,8 @@ const db = require('../models/Content_sequelize');
 
 
 const Content = db.content;
-console.log("Banco: ",Content);
-//const Op = db.Sequilize.Op;
+// console.log("Banco Content: ",Content);
+//const Op = db.Sequelize.Op;
 
 module.exports = {
 
@@ -69,11 +69,13 @@ module.exports = {
     },
 
     async showBillingPMPGParam(req, res) {
+        console.log("Req",req.params);
         const { page = 1 } = req.query;
         const data = req.params.id;
         // console.log("Req: ", req.params.id);
         let BillingDetailed = '';
-        const clause = { order: [
+        const clause = { where: {mes_id: req.params.mes_id}
+                       , order: [
                                 ['ORIGEM', 'ASC'],
                                 ['DATA', 'ASC'],
                                 ['HORA', 'ASC']] ,page, paginate:50};

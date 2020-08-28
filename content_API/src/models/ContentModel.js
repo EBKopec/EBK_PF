@@ -29,6 +29,9 @@ module.exports = (sequelize, Sequelize) => {
       USER_ID: {
         type: Sequelize.INTEGER
       },
+      MES_ID: {
+        type: Sequelize.INTEGER
+      },
       TIPO: {
         type: Sequelize.STRING
       },

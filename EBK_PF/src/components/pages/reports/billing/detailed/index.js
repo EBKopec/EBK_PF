@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 // import Tabs from '../../../../tabs/tabs';
-import { Tab, Tabs} from '@material-ui/core';
-import Table from '../../table/table2';
+import { Tab, Tabs } from '@material-ui/core';
+import Table from '../../table/table';
 import Data from '../../../../services/api';
 
 import './styles.css';
-
+const columns = "TIPO.ORIGEM.DATA.HORA.DESTINO.CIDADE_DESTINO.DURACAO_REAL.CUSTO";
 const heads = ["TIPO",
             "ORIGEM", 
             "DATA" ,
@@ -17,29 +17,52 @@ const heads = ["TIPO",
         ]
 
 export default class Detailed extends Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
+        // const { selectedYear,selectedMonth} = this.props;
         this.state = {
                 content: [],
                 contentInfo: {},
                 page: 1,
                 tabIndex: 0,
-                selectedTab:0
+                selectedTab:0,
+                selectedYear: new Date().getFullYear(),
+                selectedMonth: parseInt(new Date().getMonth()) + 1, 
+
         }
     }
 
     componentDidMount() {
-        this.loadContent();
+        
+            this.loadContent();   
     }
+    componentDidUpdate(){
+        // console.log("Did Update", this.props);
+        const propsYM = `${this.props.selectedYear.value}${this.props.selectedMonth.value}`;
+        const stateYM = `${this.state.selectedYear}${this.state.selectedMonth}`;
+        // console.log('propsYM', propsYM, 'stateYM', stateYM);
+        if ( propsYM !== stateYM ){
+            this.loadContent();
+            this.setState({selectedYear: this.props.selectedYear.value, selectedMonth: this.props.selectedMonth.value })
+        }
+
+
+    }
+
 
     loadContent = async (page = 1) => {
         try {
+            // console.log('DidMount', this.props);
+            // const { loadContent } = this.props;
             const route = this.state.selectedTab === null ? null : this.state.selectedTab;
-            const post = await Data.post(`/billing/${route}?page=${page}`);
+            const YM = `${this.props.selectedYear.value}${this.props.selectedMonth.value}`
+            const post = await Data.post(`/billing/${route}/${YM}?page=${page}`);
+            console.log('Post', post);
+            // console.log('POST', post);
             const { docs, ...contentInfo } = post.data
             // console.log("Docs", response.data);
             // const { docs, ...contentInfo } = response.data;
-            this.setState({ content: docs, contentInfo, page, route});
+            this.setState({ content: docs, contentInfo, page, route, selectedYear: this.props.selectedYear.value, selectedMonth: this.props.selectedMonth.value});
         } catch (error) {
             console.log(error);
         }
@@ -56,6 +79,7 @@ export default class Detailed extends Component {
 
     };
     nextPage = () => {
+        // console.log(this, this.props.selectedYear);
         const {page, contentInfo} = this.state;
         // console.log("Paginas", page, contentInfo);
         if (page >= contentInfo.pages) return;
@@ -91,10 +115,10 @@ export default class Detailed extends Component {
 
     handleChange = async (event, newValue) => {
         try {
-
             const page = 1;
             const value = newValue;
-            const post = await Data.post(`/billing/${value}?page=${page}`);
+            const YM = `${this.props.selectedYear.value}${this.props.selectedMonth.value}`
+            const post = await Data.post(`/billing/${value}/${YM}/?page=${page}`);
             const { docs, ...contentInfo } = post.data
             this.setState({selectedTab:value, content: docs, contentInfo, page});
         } catch (error) {
@@ -118,10 +142,10 @@ export default class Detailed extends Component {
                     <Tab className={this.state.selectedTab === 7 ? "activated" : "tab"} label="FMS AIH 0800"/>
                 </Tabs>
                 <div className="table">
-                    <Table Header={heads} data={content}/>
+                    <Table Header={heads} data={content} columns={columns}/>
                 </div>
                 <div className="actions">
-                    <button disabled={page <= 1} onClick={this.firstPage}>Primera Página</button>
+                    <button disabled={page <= 1} onClick={this.firstPage}>Primeira Página</button>
                     <button disabled={page <= 1} onClick={this.prevPage}>Anterior</button>
                     <button disabled={true}>Página {page} de {contentInfo.pages}</button>
                     <input placeholder="Insira a Página" name="page" ref="newPage" />

@@ -15,7 +15,8 @@ import './styles.css';
 const StyledMenu = withStyles({
     paper: {
         border: '1px solid #d3d4d5',
-        backgroundColor: "rgba(255, 255, 255, 0.8)",
+        backgroundColor: "rgba(250, 250, 250)",
+        
     },
 })((props) => (
     <Menu

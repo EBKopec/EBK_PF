@@ -35,6 +35,10 @@ body{
     width: 200px;
     padding: 10px;
 }
+.finders .selectedFile{
+    width: 150px;
+    padding: 10px;
+}
 
 .finders button{
     padding: 10px;

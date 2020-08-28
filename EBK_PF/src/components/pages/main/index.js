@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Data from '../../services/api';
 import { Link } from 'react-router-dom';
-
+import Banner from '../../banner/index';
 import './styles.css'
 
 export default class Main extends Component{
@@ -51,6 +51,7 @@ export default class Main extends Component{
         return (
             
             <div className="box">
+                <Banner />
             <div className="content_rules">
                 {content.map( content => (
                     <article key={content.id}>
