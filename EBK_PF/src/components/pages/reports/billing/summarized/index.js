@@ -5,6 +5,7 @@ import Detail from '../detailed/index';
 import Currency from 'react-currency-format';
 import Data from '../../../../services/api';
 import Banner from '../../../../banner/index';
+import { checkArray } from '../../../../utils/utils';
 import './styles.css';
 
 const file = [
@@ -77,7 +78,7 @@ export default class Billing extends Component {
         // console.log(resp_Y, resp_M)
         ano = resp_Y.data.map((id_ano) => { return { value: id_ano.id_ano, label: id_ano.id_ano } });
         mes = resp_M.data.map((id_mes) => { return { value: id_mes.id_mes, label: id_mes.mes } });
-        console.log('ano, mes', ano, mes);
+        // console.log('ano, mes', ano, mes);
         this.setState({ year: ano, month: mes });
     }
 
@@ -102,14 +103,21 @@ export default class Billing extends Component {
 
     handleSubmit = async e => {
         const { selectedYear, selectedMonth } = this.state;
-        console.log('aqui', this);
+        // console.log('aqui', this);
+
         const response = await Data.get(`/resumeConsume/${selectedYear.value}${selectedMonth.value}`);
-        // console.log("Response", response);
         const { data } = response;
-        // console.log("Data", data)
-        this.setState({ resume_consume: data, selectedYear, selectedMonth, loadContent: true });
+        // console.log(response);
+        try {
+            checkArray(data);
+            // console.log(data);
+        } catch (err) {
+            console.log('Erro', err);
+            return alert(`Não há dados processados para o mês de ${selectedMonth.label} de ${selectedYear.value}!`);
+        }
         // console.log(this.state.content);
         // this.download();
+        this.setState({ resume_consume: data, selectedYear, selectedMonth, loadContent: true });
         this.total();
         this.mapping();
     }
@@ -133,7 +141,7 @@ export default class Billing extends Component {
 
     handleDownload = async e => {
         const { selectedYear, selectedMonth, selectedFile } = this.state;
-        console.log('Antes Download', selectedYear, selectedMonth, selectedFile);
+        console.log('State', this.state);
         if (!selectedYear || !selectedMonth || !selectedFile) {
             alert("Escolha um formato para download!");
         } else {
@@ -152,6 +160,9 @@ export default class Billing extends Component {
                     link.setAttribute('download', `Files_${year}${month}.zip`); //or any other extension
                     document.body.appendChild(link);
                     link.click();
+                }).catch((err) => {
+                    console.log(err);
+                    return alert(`Não há dados processados para o mês de ${selectedMonth.label} de ${selectedYear.value}!`);
                 });
                 this.setState({ selectedFile })
             } catch (err) {
