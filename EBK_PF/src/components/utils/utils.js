@@ -3,6 +3,6 @@ export const checkArray = (array) => {
         return array
     } else {
         console.log(array);
-        throw "Array invalid or empty";
+        throw new Error("Array invalid or empty");
     }
 };
