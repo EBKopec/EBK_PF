@@ -1,7 +1,7 @@
 module.exports = {
-    HOST: "localhost",
-    USER: "novafibra",
-    PASSWORD: "novafibra",
+    HOST: "10.85.24.17",
+    USER: "pfa",
+    PASSWORD: "NovaFibr@2020",
     DB: "novafibra",
     dialect: "mysql",
     pool: {
