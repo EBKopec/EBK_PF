@@ -9,8 +9,8 @@ import { checkArray } from '../../../../utils/utils';
 import './styles.css';
 
 const file = [
-    { value: 'PDF', label: 'Pdf' },
-    { value: 'XLSX', label: 'Excel' }
+    { value: 'PDF_R', label: 'Pdf' },
+    { value: 'XLSX_R', label: 'Excel' }
 ]
 // const year = [
 //     { value: 2015, label: 2015 },
