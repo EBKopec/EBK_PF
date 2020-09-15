@@ -9,20 +9,24 @@ import './styles.css'
 
 
 const columns = "User_group.RAMAIS_ATIVOS.ATIVADOS_MES.EM_ATIVACAO.DESCONECTADOS";
-const columns_2 = "User_group.linha.ATIVADOS_MES.EM_ATIVACAO.DESCONECTADOS";
+const columns_2 = "User_group.linha.tipo_linha.DATA_VALIDACAO_CLIENTE.DATA_ENVIO_NOVA.DATA_CANCELAMENTO.status.DESCRICAO_LOCAL.DESCRICAO_SETOR";
 const heads = [
     "GRUPO",
     "RAMAIS ATIVOS",
-    "RAMAIS ATIVADOS NO MÊS ATUAL",
-    "RAMAIS EM ATIVAÇÃO",
+    "RAMAIS ATIVADOS MÊS CORRENTE",
+    "RAMAIS PENDENTES ATIVAÇÃO",
     "RAMAIS DESCONECTADOS"
 ]
 const heads_2 = [
     "GRUPO",
     "LINHA",
-    "RAMAIS ATIVADOS - MÊS ATUAL",
-    "RAMAIS EM ATIVAÇÃO",
-    "RAMAIS DESCONECTADOS"
+    "TIPO LINHA",
+    "DATA DE ATIVAÇÃO",
+    "DATA DE CADASTRO",
+    "DATA DE DESCONEXÃO",
+    "STATUS",
+    "DESCRIÇÃO LOCAL",
+    "DESCRIÇÃO SETOR"
 ]
 
 
@@ -37,6 +41,7 @@ export default class Extensions extends Component {
             pages: 1,
             year: null,
             month: null,
+            ext: null,
             selectedYear: new Date().getFullYear(),
             selectedMonth: parseInt(new Date().getMonth()) + 1
         }
@@ -45,6 +50,7 @@ export default class Extensions extends Component {
         this.loadContent();
         this.loadContentMonth();
         this.loadYearMonth();
+        this.listExts();
     }
 
     loadYearMonth = async () => {
@@ -56,8 +62,13 @@ export default class Extensions extends Component {
         // console.log(resp_Y, resp_M)
         ano = resp_Y.data.map((id_ano) => { return { value: id_ano.id_ano, label: id_ano.id_ano } });
         mes = resp_M.data.map((id_mes) => { return { value: id_mes.id_mes, label: id_mes.mes } });
-        console.log('ano, mes', ano, mes);
+        // console.log('ano, mes', ano, mes);
         this.setState({ year: ano, month: mes });
+    }
+    listExts = async () => {
+        const exts = await Data.get(`/listExts`);
+        let ext = exts.data.map((id_exts) => { return {value: id_exts.linha, label: id_exts.linha}});
+        this.setState({ext: ext});
     }
 
     loadContent = async () => {
@@ -65,7 +76,7 @@ export default class Extensions extends Component {
         try {
             const YM = (this.state.selectedYear.value && this.state.selectedMonth.value) === undefined ? `${selectedYear}${selectedMonth}` : `${this.state.selectedYear.value}${this.state.selectedMonth.value}`;
             const response = await Data.get(`/extensionqty/${YM}`);
-            console.log('Resp', response.data);
+            // console.log('Resp', response.data);
             const { data } = response
             this.setState({ content: data });
         } catch (error) {
@@ -93,6 +104,10 @@ export default class Extensions extends Component {
         this.setState({ selectedMonth });
         console.log(`Month Selected: `, selectedMonth);
     };
+    extChange = selectedExt => {
+        this.setState({ selectedExt });
+        console.log(`Ext Selected: `, selectedExt);
+    }
 
     handleSubmit = async () => {
         const { selectedYear, selectedMonth } = this.state
@@ -103,12 +118,24 @@ export default class Extensions extends Component {
             const { data } = respQty;
             const { docs, ...contentInfo } = respMonth.data;
             console.log(contentInfo);
-            this.setState({ content: data, info: docs, contentInfo, pages: contentInfo.pages });
+            this.setState({ content: data, info: docs, contentInfo, pages: contentInfo.pages, selectedExt:null });
         } catch (error) {
             console.log(error);
         }
     }
 
+    handleSubmitExt = async () => {
+        const { selectedExt } = this.state
+        try {
+            const exts = await Data.get(`/exts/${selectedExt.value}`);
+            console.log('exts', exts);
+            const { docs, ...contentInfo } = exts.data;
+            // console.log('docs', docs);
+            this.setState({ info: docs, contentInfo, pages: contentInfo.pages });
+        } catch (error) {
+            console.log(error);
+        }
+    }
     showExts = () => {
         const { content } = this.state;
         // console.log('Content', this.state);
@@ -124,7 +151,7 @@ export default class Extensions extends Component {
 
     showExtsMonths = () => {
         const { info, page, pages } = this.state;
-        console.log("Pages", pages);
+        // console.log("Pages", pages);
         const showExtsMonths = (
             <div className="groupsExt">
                 <div className="table">
@@ -188,7 +215,7 @@ export default class Extensions extends Component {
 
     render() {
 
-        const { selectedYear, selectedMonth, year, month } = this.state;
+        const { selectedYear, selectedMonth, selectedExt, year, month, ext } = this.state;
         return (
             <div>
                 <Banner />
@@ -210,7 +237,14 @@ export default class Extensions extends Component {
                             placeholder="Selecione o Mês"
                             isSearchable />
                         <button className="findButton" onClick={this.handleSubmit}>Buscar</button>
-                        {/* <button className="download">Download</button> */}
+                        <Select
+                            className="selectedExt"
+                            value={selectedExt}
+                            onChange={this.extChange}
+                            options={ext}
+                            placeholder="Selecione o Ramal"
+                            isSearchable />
+                        <button className="findButton" onClick={this.handleSubmitExt}>Ramal</button>
                     </div>
                     <Tabs>
                         <div label="Relatório Sumarizado">
@@ -223,6 +257,7 @@ export default class Extensions extends Component {
                                 {this.showExtsMonths()}
                             </div>
                         </div>
+                      
 
                     </Tabs>
 

@@ -31,9 +31,11 @@ routes.get("/billing", ContentController.showBillingPMPG);
 routes.get('/resumeConsume/:id', ResumeConsumeController.showResumeConsume);
 routes.post("/billing/:id/:mes_id", ContentController.showBillingPMPGParam);
 
-//ExtensionsQty
+//Extensions
 routes.get("/extensionqty/:mes_id", ExtensionsController.showExtensionsQty);
 routes.get("/extmonth/:mes_id", ExtensionsController.showExtMonth);
+routes.get("/exts/:ext_id?", ExtensionsController.showExt);
+routes.get("/listExts", ExtensionsController.listExts);
 
 // Utils
 routes.get("/year", YMController.showYear);

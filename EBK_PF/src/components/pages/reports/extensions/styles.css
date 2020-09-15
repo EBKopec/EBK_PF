@@ -54,7 +54,7 @@ body{
     padding: 0 0 10px;
 }
 
-.extension .selectedYear, .selectedMonth{
+.extension .selectedYear, .selectedMonth, .selectedExt{
     width: 200px;
     padding: 10px;
 }

@@ -1,5 +1,6 @@
 const db = require('../models/Content_sequelize');
-
+const { Sequelize, sequelize } = require('../models/Content_sequelize');
+const { formatToCurrency } = require('../utils/utils');
 
 const Content = db.content;
 // console.log("Banco Content: ",Content);
@@ -74,7 +75,17 @@ module.exports = {
         const data = req.params.id;
         // console.log("Req: ", req.params.id);
         let BillingDetailed = '';
-        const clause = { where: {mes_id: req.params.mes_id}
+        const clause = { attributes: [ 'TIPO'
+                                    , 'ORIGEM'
+                                    , [Sequelize.literal('DATE_FORMAT(DATA, "%d-%m-%Y")'),'DATA']
+                                    , 'HORA'
+                                    , 'DESTINO'
+                                    , 'CIDADE_DESTINO'
+                                    , 'DURACAO_REAL'
+                                    // , [formatToCurrency(Sequelize.literal('CUSTO')), 'CUSTO']
+                                    , [Sequelize.fn('format',Sequelize.col('CUSTO'),3,'pt_BR'),'CUSTO']
+                                ]
+                       , where: {mes_id: req.params.mes_id}
                        , order: [
                                 ['ORIGEM', 'ASC'],
                                 ['DATA', 'ASC'],

@@ -8,9 +8,14 @@ module.exports = {
         } else {
             return month_id
         }
+    },
+
+    formatToCurrency(amount){
+        const value = parseFloat(amount).toFixed(3).replace(/\d(?=(\d{3})+\,)/g, '$&.');
+        console.log(`Valores --->>>> ${amount} <<<<---`)
+        return value
     }
 }
-
 
 // (month_id):
 //     if len(str(month_id)) == 5:

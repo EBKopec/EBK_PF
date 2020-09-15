@@ -6,14 +6,14 @@ import Data from '../../../../services/api';
 
 import './styles.css';
 const columns = "TIPO.ORIGEM.DATA.HORA.DESTINO.CIDADE_DESTINO.DURACAO_REAL.CUSTO";
-const heads = ["TIPO",
-            "ORIGEM", 
-            "DATA" ,
-            "HORA",
-            "DESTINO",
-            "CIDADE DESTINO", 
-            "DURAÇÃO",  
-            "CUSTO ( R$ )"
+const heads = [ "TIPO"
+              , "ORIGEM"
+              , "DATA"
+              , "HORA"
+              , "DESTINO"
+              , "CIDADE DESTINO"
+              , "DURAÇÃO"  
+              , "CUSTO ( R$ )"
         ]
 
 export default class Detailed extends Component {

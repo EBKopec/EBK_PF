@@ -54,8 +54,7 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       CUSTO: {
-        type: Sequelize.DECIMAL
-        
+        type: Sequelize.DECIMAL       
       }
     },
     {
