@@ -42,6 +42,7 @@ export default class Extensions extends Component {
             year: null,
             month: null,
             ext: null,
+            selectedExt: null,
             selectedYear: new Date().getFullYear(),
             selectedMonth: parseInt(new Date().getMonth()) + 1
         }
@@ -74,7 +75,8 @@ export default class Extensions extends Component {
     loadContent = async () => {
         const { selectedYear, selectedMonth } = this.state
         try {
-            const YM = (this.state.selectedYear.value && this.state.selectedMonth.value) === undefined ? `${selectedYear}${selectedMonth}` : `${this.state.selectedYear.value}${this.state.selectedMonth.value}`;
+            const YM = (this.state.selectedYear.value && this.state.selectedMonth.value) === undefined ? `${selectedYear}${selectedMonth}` : `${this.state.selectedYear}${this.state.selectedMonth}`;
+            // console.log(`EXT ${ext} e YM ${YM}`);
             const response = await Data.get(`/extensionqty/${YM}`);
             // console.log('Resp', response.data);
             const { data } = response
@@ -87,9 +89,17 @@ export default class Extensions extends Component {
     loadContentMonth = async (page = 1) => {
         const { selectedYear, selectedMonth } = this.state;
         try {
-            const YM = (this.state.selectedYear.value && this.state.selectedMonth.value) === undefined ? `${selectedYear}${selectedMonth}` : `${this.state.selectedYear.value}${this.state.selectedMonth.value}`;
-            const response = await Data.get(`/extmonth/${YM}?page=${page}`);
+            var response;
+            if ( selectedYear === null ){
+                response = await Data.get(`/exts/all?page=${page}`);
+            } else {
+                const YM = ((this.state.selectedYear.value && this.state.selectedMonth.value) === undefined)  ? `${selectedYear}${selectedMonth}` : `${this.state.selectedYear.value}${this.state.selectedMonth.value}`;
+                response = await Data.get(`/extmonth/${YM}?page=${page}`);
+                
+            }
+            
             const { docs, ...contentInfo } = response.data;
+            console.log('docs', docs);
             this.setState({ info: docs, contentInfo, page })
         } catch (error) {
             console.log(error);
@@ -117,8 +127,8 @@ export default class Extensions extends Component {
             const respMonth = await Data.get(`/extmonth/${YM}`);
             const { data } = respQty;
             const { docs, ...contentInfo } = respMonth.data;
-            console.log(contentInfo);
-            this.setState({ content: data, info: docs, contentInfo, pages: contentInfo.pages, selectedExt:null });
+            // console.log(contentInfo);
+            this.setState({ content: data, info: docs, contentInfo, page: 1, pages: contentInfo.pages, selectedExt:null });
         } catch (error) {
             console.log(error);
         }
@@ -126,12 +136,15 @@ export default class Extensions extends Component {
 
     handleSubmitExt = async () => {
         const { selectedExt } = this.state
+        // console.log('SelectedExt', selectedExt);
         try {
-            const exts = await Data.get(`/exts/${selectedExt.value}`);
+            const ext = selectedExt === undefined || selectedExt === null ? `all` : `${selectedExt.value}`
+            console.log('All',selectedExt);
+            const exts = await Data.get(`/exts/${ext}`);
             console.log('exts', exts);
             const { docs, ...contentInfo } = exts.data;
             // console.log('docs', docs);
-            this.setState({ info: docs, contentInfo, pages: contentInfo.pages });
+            this.setState({ info: docs, contentInfo, page: 1, pages: contentInfo.pages, selectedMonth: null, selectedYear: null });
         } catch (error) {
             console.log(error);
         }
@@ -182,7 +195,7 @@ export default class Extensions extends Component {
     };
     nextPage = () => {
         const { page, contentInfo } = this.state;
-        console.log(this.state);
+        // console.log(this.state);
         if (page >= contentInfo.pages) return;
         const pageNumber = page + 1;
         // console.log(`Current Page: ${page}, Next Page: ${pageNumber}`);

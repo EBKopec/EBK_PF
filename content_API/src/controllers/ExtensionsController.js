@@ -98,7 +98,8 @@ module.exports = {
             ],
             where : Sequelize.where(Sequelize.fn('date_format', Sequelize.col('DATA_ALTERACAO'), "%Y%m"), Sequelize.Op.eq, month_Id),
             group: ['controle_agrupamento.user_group_id', 'linha'],
-            // order: ['user_group_id','linha'],
+            order: [['linha','asc'],
+                    ['DATA_VALIDACAO_CLIENTE','asc']],
             
 
         page, paginate:10});
@@ -154,7 +155,8 @@ module.exports = {
             // where : Sequelize.where(req.params.ext_id, Sequelize.Op.eq, Sequelize.col('linha')),
             where : [ext],
             group: ['controle_agrupamento.user_group_id', 'linha'],
-            // order: ['user_group_id','linha'],
+            order: [['linha','asc'],
+                    ['DATA_VALIDACAO_CLIENTE','asc']],
             
 
         page, paginate:10});
