@@ -42,6 +42,7 @@ module.exports = {
     async showMainContent(req, res) {
         const { page = 1 } = req.query;
         const main_content = await Content.Main_Content.paginate({where: {'ContentId':req.params.id},
+            order:[['id','ASC']],
             page, paginate:30});
 
         return res.json(main_content);

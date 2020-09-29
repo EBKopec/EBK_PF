@@ -2,7 +2,7 @@ import axios from "axios";
 export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 export const getToken = () => localStorage.getItem(TOKEN_KEY);
 
-const API_URL = "http://10.85.24.19:3001/api/auth/";
+const API_URL = "http://localhost:3001/api/auth/";
 var TOKEN_KEY;
 
 class AuthService {
