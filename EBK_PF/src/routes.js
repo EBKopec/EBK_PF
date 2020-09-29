@@ -71,17 +71,17 @@ class Routes extends Component {
                             </div>
                         ) : (
                                 <div className="login-register">
-                                    <div className="login">
+                                    {/* <div className="login">
                                         <Link to={"/login"} className="login">
                                             Login
                                     </Link>
-                                    </div>
+                                    </div> */}
 
-                                    <div className="register">
+                                    {/* <div className="register">
                                         <Link to={"/register"} className="register">
                                             Registrar
                                     </Link>
-                                    </div>
+                                    </div> */}
                                     
                                 </div>
                             )}

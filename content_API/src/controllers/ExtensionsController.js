@@ -68,16 +68,16 @@ module.exports = {
             {   model: Extensions.local_setor,
                 attributes:[],
                 group: ['ID_LOCAL_SETOR'],
-                required: true,
+                required: false,
                 include: [{ model: Extensions.local,
                             attributes:[],
                             group: ['DESCRICAO_LOCAL'],
-                            required: true
+                            required: false
                             },
                           { model: Extensions.setor,
                               attributes:[],
                               group: [ 'DESCRICAO_SETOR'],
-                              required: true
+                              required: false
                           }
                         ]
             }],
@@ -124,16 +124,16 @@ module.exports = {
             {   model: Extensions.local_setor,
                 attributes:[],
                 group: ['ID_LOCAL_SETOR'],
-                required: true,
+                required: false,
                 include: [{ model: Extensions.local,
                             attributes:[],
                             group: ['DESCRICAO_LOCAL'],
-                            required: true
+                            required: false
                             },
                           { model: Extensions.setor,
                               attributes:[],
                               group: [ 'DESCRICAO_SETOR'],
-                              required: true
+                              required: false
                           }
                         ]
             }],

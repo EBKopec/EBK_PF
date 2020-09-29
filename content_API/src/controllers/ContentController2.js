@@ -17,7 +17,7 @@ module.exports = {
     },
     async indexMainContent(req, res){
         const { page = 1 } = req.query;
-        const main_content = await Content.Main_Content.paginate({page, paginate:10});
+        const main_content = await Content.Main_Content.paginate({page, paginate:30});
         
         return res.json(main_content);
     },
@@ -42,7 +42,7 @@ module.exports = {
     async showMainContent(req, res) {
         const { page = 1 } = req.query;
         const main_content = await Content.Main_Content.paginate({where: {'ContentId':req.params.id},
-            page, paginate:15});
+            page, paginate:30});
 
         return res.json(main_content);
     },
@@ -104,16 +104,16 @@ module.exports = {
                 BillingDetailed = await Content.VW_sme_cmei.paginate(clause);
                 break;
             case '4':
-                BillingDetailed = await Content.VW_sms_pab.paginate(clause);
+                BillingDetailed = await Content.VW_fms_pab.paginate(clause);
                 break;
             case '5':
-                BillingDetailed = await Content.VW_sms_pab_0800.paginate(clause);
+                BillingDetailed = await Content.VW_fms_pab_0800.paginate(clause);
                 break;
             case '6':
-                BillingDetailed = await Content.VW_sms_aih.paginate(clause);
+                BillingDetailed = await Content.VW_fms_aih.paginate(clause);
                 break;
             case '7':
-                BillingDetailed = await Content.VW_sms_aih_0800.paginate(clause);
+                BillingDetailed = await Content.VW_fms_aih_0800.paginate(clause);
                 break;
             default:
                 BillingDetailed = await Content.VW_pmpg.paginate(clause);

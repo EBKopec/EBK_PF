@@ -165,7 +165,7 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: false,
     });
 
-    const VW_sms_aih = sequelize.define('vw_sms_aihs',{
+    const VW_fms_aih = sequelize.define('vw_fms_aihs',{
       USER_ID: {
         type: Sequelize.INTEGER
       },
@@ -200,7 +200,7 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: false,
     });
 
-    const VW_sms_aih_0800 = sequelize.define('vw_sms_aih_0800s',{
+    const VW_fms_aih_0800 = sequelize.define('vw_fms_aih_0800s',{
       USER_ID: {
         type: Sequelize.INTEGER
       },
@@ -234,7 +234,7 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: false,
     });
 
-    const VW_sms_pab = sequelize.define('vw_sms_pabs',{
+    const VW_fms_pab = sequelize.define('vw_fms_pabs',{
       USER_ID: {
         type: Sequelize.INTEGER
       },
@@ -269,7 +269,7 @@ module.exports = (sequelize, Sequelize) => {
       timestamps: false,
     });
 
-    const VW_sms_pab_0800 = sequelize.define('vw_sms_pab_0800s',{
+    const VW_fms_pab_0800 = sequelize.define('vw_fms_pab_0800s',{
       USER_ID: {
         type: Sequelize.INTEGER
       },
@@ -311,9 +311,9 @@ module.exports = (sequelize, Sequelize) => {
     sequelizePaginate.paginate(VW_pmpg_0800);
     sequelizePaginate.paginate(VW_sme_escola);
     sequelizePaginate.paginate(VW_sme_cmei);
-    sequelizePaginate.paginate(VW_sms_aih);
-    sequelizePaginate.paginate(VW_sms_aih_0800);
-    sequelizePaginate.paginate(VW_sms_pab);
-    sequelizePaginate.paginate(VW_sms_pab_0800);
-    return {Content, Main_Content, VW_pmpg, VW_pmpg_0800, VW_sme_escola, VW_sme_cmei, VW_sms_aih, VW_sms_aih_0800, VW_sms_pab, VW_sms_pab_0800};
+    sequelizePaginate.paginate(VW_fms_aih);
+    sequelizePaginate.paginate(VW_fms_aih_0800);
+    sequelizePaginate.paginate(VW_fms_pab);
+    sequelizePaginate.paginate(VW_fms_pab_0800);
+    return {Content, Main_Content, VW_pmpg, VW_pmpg_0800, VW_sme_escola, VW_sme_cmei, VW_fms_aih, VW_fms_aih_0800, VW_fms_pab, VW_fms_pab_0800};
   };
