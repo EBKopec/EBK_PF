@@ -1,8 +1,7 @@
-require('dotenv/config');
 module.exports = {
-    HOST: 'localhost',
-    USER: 'root',
-    PASSWORD: 'Bigodao@00',
+    HOST: '10.85.24.33',
+    USER: 'pfa',
+    PASSWORD: 'NovaFibr@2020',
     DB: 'novafibra',
     dialect: "mysql",
     pool: {
